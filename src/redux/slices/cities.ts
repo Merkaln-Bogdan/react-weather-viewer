@@ -1,17 +1,20 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 
-import type { RootState } from '../store';
+import type { RootState } from "../store";
 
 const citiesAdapter = createEntityAdapter({
   selectId: (city: any) => city.id,
 });
 
 export const citiesSlice = createSlice({
-  name: 'cities',
+  name: "cities",
   initialState: citiesAdapter.getInitialState(),
   reducers: {
-    setAllData(state, action) {
+    setAllCities(state, action) {
       citiesAdapter.setAll(state, action.payload);
+    },
+    setCity(state, action) {
+      citiesAdapter.setOne(state, action.payload);
     },
   },
 });
@@ -19,7 +22,7 @@ export const citiesSlice = createSlice({
 export const getState = (rootState: RootState) => rootState.city;
 
 export const citiesSelector = citiesAdapter.getSelectors(
-  (state: RootState) => state.city,
+  (state: RootState) => state.city
 );
 
-export const { setAllData } = citiesSlice.actions;
+export const { setAllCities, setCity } = citiesSlice.actions;

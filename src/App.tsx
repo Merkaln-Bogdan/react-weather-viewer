@@ -1,19 +1,23 @@
-import { useEffect } from 'react';
-import axios from 'axios';
-import './App.css';
+import { useEffect, useState } from "react";
+
+import { weatherDataService } from "./services/services";
+import { routes } from "./data/routes";
+
+import { Details } from "./page/Details";
+import { Routes, Route } from "react-router-dom";
+import { Board } from "./page/Board";
+
+import { StorageProvider } from "contexts/StorageContext";
 
 function App() {
-  useEffect(() => {
-    axios
-      .get(
-        `http://api.openweathermap.org/data/2.5/group?id=524901,703448,2643743&units;=metric&appid=${process.env.REACT_APP_API_KEY}`,
-      )
-      .then((res) => console.log(res));
-  });
   return (
-    <div className="App">
-      <div>Hello</div>
-    </div>
+    <StorageProvider>
+      <Routes>
+        <Route path={routes.board} element={<Board />} />
+
+        <Route path="details/:id" element={<Details />} />
+      </Routes>
+    </StorageProvider>
   );
 }
 
