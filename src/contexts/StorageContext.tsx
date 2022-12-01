@@ -1,11 +1,11 @@
 /* eslint @typescript-eslint/no-explicit-any: 0 */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export type Bucket = {
   storegedData: any;
-  putData: (arg: any) => any;
-  removeData: (arg: string) => any;
-  setStoragedData: (arg: any) => any;
+  putData: (arg: any) => void;
+  removeData: (arg: any) => void;
+  setStoragedData: (arg: any) => void;
 };
 
 const defaultState: Bucket = {
@@ -24,24 +24,37 @@ type StorageProps = {
 export const StorageProvider: React.FunctionComponent<StorageProps> = ({
   children,
 }) => {
+  const initialStorage = [702550, 703448, 2643743];
+
   const citiesLocalStorage = localStorage.getItem("cities");
 
-  const [storegedData, setStoragedData] = useState<any>(citiesLocalStorage);
+  const parsedStorage = JSON.parse(citiesLocalStorage!);
 
-  localStorage.setItem("cities", JSON.stringify(storegedData));
+  if (parsedStorage === null || undefined) {
+    localStorage.setItem("cities", JSON.stringify(initialStorage));
+  }
 
-  const putData = (data: any) => {
-    const isInStorage = storegedData?.some((el: any) => el.id === data.id);
+  const [storegedData, setStoragedData] = useState<any>(
+    parsedStorage && parsedStorage
+  );
+
+  useEffect(() => {
+    localStorage.setItem("cities", JSON.stringify(storegedData));
+  }, [storegedData]);
+
+  const putData = (id: any) => {
+    const isInStorage = storegedData?.some((el: any) => el.id === id);
 
     if (isInStorage) {
       alert("Це місто вже є у списку");
     } else {
-      setStoragedData((prevState: any) => [...prevState, ...data]);
+      setStoragedData((prevState: any) => [...prevState, id]);
     }
   };
 
   const removeData = (id: string) => {
-    const filteredData = storegedData.filter((el: any) => el.id !== id);
+    const filteredData = storegedData.filter((el: any) => el !== id);
+    console.log(filteredData);
     setStoragedData(filteredData);
   };
 

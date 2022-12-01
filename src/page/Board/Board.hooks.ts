@@ -1,28 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
+
 import { citiesSelector, setAllCities } from "redux/slices/cities";
+
 import { StorageContext } from "contexts/StorageContext";
 
 import { weatherDataService } from "services/services";
-import { setIndeficators } from "redux/slices/ids";
 
 const useBoard = () => {
   const dispatch = useAppDispatch();
 
   const storageContext = useContext(StorageContext);
-  const { storegedData, setStoragedData, removeData, putData } = storageContext;
+  const { storegedData, removeData, putData } = storageContext;
 
   const [query, setQuery] = useState("");
 
-  const ids = useAppSelector((state) => state.ids.ids);
   const citiesData = useAppSelector(citiesSelector.selectAll);
-  
-  console.log("STORAGE ", storegedData, citiesData);
-  useEffect(() => {
-    if (ids !== storegedData) {
-      setStoragedData(ids);
-    }
-  }, []);
 
   useEffect(() => {
     weatherDataService
@@ -32,9 +25,7 @@ const useBoard = () => {
 
   useEffect(() => {
     if (query.length > 3) {
-      weatherDataService
-        .getNewCity(query!)
-        .then((res) => dispatch(setIndeficators(res.data.id)));
+      weatherDataService.getNewCity(query!).then((res) => putData(res.data.id));
     }
   }, [query]);
 

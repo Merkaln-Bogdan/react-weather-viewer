@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-
-import { weatherDataService } from "./services/services";
 import { routes } from "./data/routes";
+import { Routes, Route } from "react-router-dom";
 
 import { Details } from "./page/Details";
-import { Routes, Route } from "react-router-dom";
 import { Board } from "./page/Board";
 
 import { StorageProvider } from "contexts/StorageContext";

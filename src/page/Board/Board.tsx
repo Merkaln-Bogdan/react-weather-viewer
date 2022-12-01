@@ -1,59 +1,34 @@
-import { routes } from "data/routes";
-import { Link } from "react-router-dom";
+import { TextField } from "@mui/material";
+
+import { DefaultLayout } from "sections/Layout";
 import { useBoard } from "./Board.hooks";
 
-function Board() {
+import * as S from "./Board.styled";
+import { Item } from "./components/Item";
+
+function Board(): React.ReactElement {
   const { citiesData, handleAddCity, removeData } = useBoard();
+
   return (
-    <div>
-      <input onChange={handleAddCity} />
-      <ul
-        style={{
-          width: "100%",
-          display: "flex",
-          listStyle: "none",
-        }}
-      >
-        {citiesData &&
-          citiesData?.map((el: any) => (
-            <li
-              style={{
-                width: "250px",
-                height: "250px",
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                flexDirection: "column",
-                border: "1px solid gray",
-                marginRight: "10px",
-              }}
-              key={el.id}
-            >
-              <button onClick={() => removeData(el.id)}>Remove</button>
-              <Link to={routes.details(el.id)}>
-                <div
-                  style={{
-                    width: "180px",
-                    height: "180px",
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    flexDirection: "column",
-                    border: "1px solid gray",
-                    marginRight: "10px",
-                  }}
-                >
-                  <span>{el.name}</span>
-                  <span>{el.main.temp}</span>
-                  {el.weather.map((data: any) => (
-                    <span key={data.id}>{data.main}</span>
-                  ))}
-                </div>
-              </Link>
-            </li>
-          ))}
-      </ul>
-    </div>
+    <DefaultLayout>
+      <S.Container>
+        <TextField
+          onChange={handleAddCity}
+          id="outlined-basic"
+          label="Search"
+          variant="outlined"
+        />
+        <S.Container>
+          <S.List>
+            {citiesData &&
+              citiesData?.map((item: any) => (
+                <Item city={item} removeItem={removeData!} key={item.id} />
+              ))}
+            <Item asAddCard key="additionalKey11" />
+          </S.List>
+        </S.Container>
+      </S.Container>
+    </DefaultLayout>
   );
 }
 

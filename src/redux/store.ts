@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { citiesSlice } from "./slices/cities";
-import { indeficatorSlice } from "./slices/ids";
 
 const store = configureStore({
   reducer: {
     city: citiesSlice.reducer,
-    ids: indeficatorSlice.reducer,
   },
 });
 

@@ -1,6 +1,14 @@
-import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createEntityAdapter,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
 
 import type { RootState } from "../store";
+const initialState = {
+  cities: [],
+  loading: false,
+};
 
 const citiesAdapter = createEntityAdapter({
   selectId: (city: any) => city.id,
@@ -13,9 +21,6 @@ export const citiesSlice = createSlice({
     setAllCities(state, action) {
       citiesAdapter.setAll(state, action.payload);
     },
-    setCity(state, action) {
-      citiesAdapter.setOne(state, action.payload);
-    },
   },
 });
 
@@ -25,4 +30,4 @@ export const citiesSelector = citiesAdapter.getSelectors(
   (state: RootState) => state.city
 );
 
-export const { setAllCities, setCity } = citiesSlice.actions;
+export const { setAllCities } = citiesSlice.actions;
