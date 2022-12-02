@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { Board } from "./Board";
 
-test("renders Board page", () => {
+test("renders Details page", () => {
   render(<Board />);
 });

@@ -1,42 +1,45 @@
+import { Button } from "@mui/material";
 import { DefaultLayout } from "sections/Layout";
 
 import { Scale } from "./components/Scale";
+
 import { useDetails } from "./Details.hooks";
 
 import * as S from "./Details.styled";
-import { Headline } from "components/Headline";
-import { Button } from "@mui/material";
 
 function Details(): React.ReactElement {
-  const { cityData, updateInfo } = useDetails();
-  console.log(cityData);
+  const { city, loading, updateInfo } = useDetails();
 
-  return !cityData ? (
-    <>Loading</>
+  return loading ? (
+    <>Loading...</>
   ) : (
     <DefaultLayout>
       <S.Container>
         <S.Box>
-          <S.City>{cityData.name}</S.City>
-          <S.Temperature>
-            {Math.round(cityData.main.temp)} &#8451;
-          </S.Temperature>
+          <S.Text isMain>{city.name}</S.Text>
+          <S.Text isMain>{Math.round(city.main.temp)} &#8451;</S.Text>
         </S.Box>
-        <Headline>wind {cityData.wind.speed}m/c</Headline>
+
+        <S.Text>
+          wind {city.wind.speed}m/c <S.SvgIcon name="WiStrongWind" />
+        </S.Text>
 
         <S.List>
-          {cityData &&
-            cityData.weather?.map((el: any) => (
+          {city &&
+            city.weather?.map((el: any) => (
               <S.ListItem key={el.id}>
-                <Headline tag="span">{el.main}</Headline>
-                <Headline tag="span">{el.description}</Headline>
+                <S.Text tag="span">{el.main}</S.Text>
+                <S.Text tag="span">
+                  {el.description}
+                  <S.SvgIcon name="WiCloudy" />
+                </S.Text>
               </S.ListItem>
             ))}
         </S.List>
 
         <Scale />
 
-        <Button onClick={() => updateInfo()}>Renew info</Button>
+        <Button onClick={() => updateInfo()}>Update info</Button>
       </S.Container>
     </DefaultLayout>
   );

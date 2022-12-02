@@ -1,33 +1,53 @@
-import {
-  createSlice,
-  createEntityAdapter,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
-import type { RootState } from "../store";
+import { weatherDataService } from "services/services";
+import { CityType } from "types";
+
+export const getCities = createAsyncThunk(
+  "cities/getCities",
+  async (ids: object, thunkApi) => {
+    try {
+      const response = await weatherDataService.getAllCities(ids);
+      return response.data.list;
+    } catch (error: any) {
+      const message = error.message;
+      return thunkApi.rejectWithValue(message);
+    }
+  }
+);
+
+interface CitiesState {
+  loading: boolean;
+  error: string | null;
+  cities: CityType[] | null;
+}
+
 const initialState = {
-  cities: [],
   loading: false,
-};
+  error: null,
+  cities: [],
+} as CitiesState;
 
-const citiesAdapter = createEntityAdapter({
-  selectId: (city: any) => city.id,
-});
-
-export const citiesSlice = createSlice({
+const citiesSlice = createSlice({
   name: "cities",
-  initialState: citiesAdapter.getInitialState(),
-  reducers: {
-    setAllCities(state, action) {
-      citiesAdapter.setAll(state, action.payload);
-    },
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(getCities.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(
+        getCities.fulfilled,
+        (state, action: PayloadAction<CityType[]>) => {
+          state.loading = false;
+          state.cities = action.payload;
+        }
+      )
+      .addCase(getCities.rejected, (state, action: PayloadAction<any>) => {
+        state.error = action.payload;
+      });
   },
 });
 
-export const getState = (rootState: RootState) => rootState.city;
-
-export const citiesSelector = citiesAdapter.getSelectors(
-  (state: RootState) => state.city
-);
-
-export const { setAllCities } = citiesSlice.actions;
+export default citiesSlice.reducer;

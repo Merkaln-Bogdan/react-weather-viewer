@@ -1,11 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { citiesSlice } from "./slices/cities";
+import citiesSlice from "./slices/cities";
+import citySlice from "./slices/city";
 
 const store = configureStore({
-  reducer: {
-    city: citiesSlice.reducer,
-  },
+  reducer: { citiesSlice, citySlice },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

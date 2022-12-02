@@ -54,7 +54,7 @@ export const StorageProvider: React.FunctionComponent<StorageProps> = ({
 
   const removeData = (id: string) => {
     const filteredData = storegedData.filter((el: any) => el !== id);
-    console.log(filteredData);
+
     setStoragedData(filteredData);
   };
 

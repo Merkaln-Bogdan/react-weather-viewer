@@ -10,6 +10,7 @@ const Container = styled.div`
 const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export { Container, List };

@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Headline } from "components/Headline";
 
 import * as S from "./Layout.styled";
 
@@ -9,5 +9,10 @@ export type DefaultLayoutProps = {
 export const DefaultLayout = (props: DefaultLayoutProps) => {
   const { children } = { ...props };
 
-  return <S.Container>{children}</S.Container>;
+  return (
+    <S.Container>
+      <Headline tag="h1">Weather viewer</Headline>
+      {children}
+    </S.Container>
+  );
 };

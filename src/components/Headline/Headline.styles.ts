@@ -6,7 +6,7 @@ export type TextProps = {
 
 const Text = styled.p<TextProps>`
   text-align: center;
-  color: ${({ theme, color }) => (color ? theme.colors[color] : "#2e3a3d")};
+  color: ${({ color }) => (color ? color : "#2e3a3d")};
 `;
 
 export { Text };

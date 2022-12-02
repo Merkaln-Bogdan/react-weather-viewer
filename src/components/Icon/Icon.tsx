@@ -1,24 +1,24 @@
-import { IconBaseProps } from 'react-icons';
-import * as BS from 'react-icons/bs';
+import { IconBaseProps } from "react-icons";
+import * as WI from "react-icons/wi";
 
-export type IconName = keyof typeof BS;
+export type IconName = keyof typeof WI;
 
 export type IconProps = {
-    name: IconName;
+  name: IconName;
 
-    className?: string;
+  className?: string;
 } & IconBaseProps;
 
 export function Icon(props: IconProps): React.ReactElement {
-    const { name, className, ...rest } = { ...props };
+  const { name, className, ...rest } = { ...props };
 
-    const Tag = BS[name];
+  const Tag = WI[name];
 
-    return className ? (
-        <span className={className}>
-            <Tag {...rest} />
-        </span>
-    ) : (
-        <Tag {...rest} />
-    );
+  return className ? (
+    <span className={className}>
+      <Tag {...rest} />
+    </span>
+  ) : (
+    <Tag {...rest} />
+  );
 }

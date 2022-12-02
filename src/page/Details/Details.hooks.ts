@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-import { weatherDataService } from "services/services";
+import { getCity } from "redux/slices/city";
 
 const useDetails = () => {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
 
-  const [cityData, setCityData] = useState<any>();
+  const { loading, city } = useAppSelector((state) => state.citySlice);
 
   useEffect(() => {
-    weatherDataService.getCity(id!).then((res) => setCityData(res.data));
-  }, [id]);
+    dispatch(getCity(id!));
+  }, [dispatch, id]);
 
   const updateInfo = () => {
-    weatherDataService.getCity(id!).then((res) => setCityData(res.data));
+    dispatch(getCity(id!));
   };
 
-  return { cityData, updateInfo };
+  return { city, updateInfo, loading };
 };
 export { useDetails };
