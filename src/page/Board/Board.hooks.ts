@@ -10,7 +10,7 @@ const useBoard = () => {
   const dispatch = useAppDispatch();
 
   const storageContext = useContext(StorageContext);
-  const { storegedData, removeData, putData } = storageContext;
+  const { storagedData, removeData, putData } = storageContext;
 
   const [query, setQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -18,8 +18,10 @@ const useBoard = () => {
   const { loading, cities } = useAppSelector((state) => state.citiesSlice);
 
   useEffect(() => {
-    dispatch(getCities(storegedData!));
-  }, [storegedData, dispatch]);
+    if (storagedData) {
+      dispatch(getCities(storagedData!));
+    }
+  }, [storagedData, dispatch]);
 
   const handleAddCity = () => {
     weatherDataService.getNewCity(query).then((res) => putData(res.data.id));

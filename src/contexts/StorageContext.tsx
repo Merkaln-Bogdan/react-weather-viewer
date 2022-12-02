@@ -2,14 +2,14 @@
 import { createContext, useEffect, useState } from "react";
 
 export type Bucket = {
-  storegedData: object;
+  storagedData: object;
   putData: (arg: any) => void;
   removeData: (arg: any) => void;
   setStoragedData: (arg: any) => void;
 };
 
 const defaultState: Bucket = {
-  storegedData: [],
+  storagedData: [],
   putData: () => null,
   removeData: () => null,
   setStoragedData: () => null,
@@ -32,16 +32,16 @@ export const StorageProvider: React.FunctionComponent<StorageProps> = ({
     localStorage.setItem("cities", JSON.stringify(initialStorage));
   }
 
-  const [storegedData, setStoragedData] = useState<any>(
+  const [storagedData, setStoragedData] = useState<any>(
     parsedStorage && parsedStorage
   );
 
   useEffect(() => {
-    localStorage.setItem("cities", JSON.stringify(storegedData));
-  }, [storegedData]);
+    localStorage.setItem("cities", JSON.stringify(storagedData));
+  }, [storagedData]);
 
   const putData = (id: any) => {
-    const isInStorage = storegedData?.some((el: any) => el.id === id);
+    const isInStorage = storagedData?.some((el: any) => el.id === id);
 
     if (isInStorage) {
       alert("Це місто вже є у списку");
@@ -51,13 +51,13 @@ export const StorageProvider: React.FunctionComponent<StorageProps> = ({
   };
 
   const removeData = (id: string) => {
-    const filteredData = storegedData.filter((el: any) => el !== id);
+    const filteredData = storagedData.filter((el: any) => el !== id);
 
     setStoragedData(filteredData);
   };
 
   const state: Bucket = {
-    storegedData,
+    storagedData,
     putData,
     removeData,
     setStoragedData,
