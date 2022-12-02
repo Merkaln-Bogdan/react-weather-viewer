@@ -2,7 +2,7 @@
   "name": "react-weather-viewer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Merkaln-Bogdan.io/react-weather-viewer",
+  "homepage": "https://Merkaln-Bogdan.github.io/react-weather-viewer",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -61,11 +61,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "react-dotenv": {
-    "whitelist": [
-      "REACT_APP_API_KEY"
     ]
   }
 }
