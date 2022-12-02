@@ -1,20 +1,18 @@
-import { routes } from "./data/routes";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Details } from "./page/Details";
 import { Board } from "./page/Board";
-
-import { StorageProvider } from "contexts/StorageContext";
+import { routes } from "data/routes";
 
 function App() {
   return (
-    <StorageProvider>
-      <Routes>
-        <Route path={routes.board} element={<Board />} />
+    <Routes>
+      <Route path="/" element={<Navigate to={routes.board} />} />
+      <Route index path="/" element={<Board />} />
 
-        <Route path="details/:id" element={<Details />} />
-      </Routes>
-    </StorageProvider>
+      <Route path="details/:id" element={<Details />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
