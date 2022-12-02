@@ -14,6 +14,7 @@ const defaultState: Bucket = {
   removeData: () => null,
   setStoragedData: () => null,
 };
+const initialStorage = [702550, 703448, 2643743];
 
 export const StorageContext = createContext(defaultState);
 
@@ -24,17 +25,16 @@ type StorageProps = {
 export const StorageProvider: React.FunctionComponent<StorageProps> = ({
   children,
 }) => {
-  const initialStorage = [702550, 703448, 2643743];
-
   const citiesLocalStorage = localStorage.getItem("cities");
-
   const parsedStorage = JSON.parse(citiesLocalStorage!);
 
   if (parsedStorage === null || undefined) {
     localStorage.setItem("cities", JSON.stringify(initialStorage));
   }
 
-  const [storegedData, setStoragedData] = useState<any>(parsedStorage);
+  const [storegedData, setStoragedData] = useState<any>(
+    parsedStorage && parsedStorage
+  );
 
   useEffect(() => {
     localStorage.setItem("cities", JSON.stringify(storegedData));
