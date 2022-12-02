@@ -2,7 +2,7 @@
   "name": "react-weather-viewer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Merkaln-Bogdan.github.io/react-weather-viewer",
+  "homepage": "https://merkaln-bogdan.github.io/react-weather-viewer",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
