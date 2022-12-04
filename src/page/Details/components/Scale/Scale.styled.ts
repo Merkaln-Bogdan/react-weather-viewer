@@ -8,6 +8,7 @@ type ScaleStyledProps = {
 
 const Container = styled.div`
   max-width: 50rem;
+  margin-bottom: 2rem;
 
   background-color: #daf7ec;
   border-radius: 0.5rem;

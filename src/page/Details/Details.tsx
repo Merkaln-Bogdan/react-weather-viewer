@@ -10,7 +10,7 @@ import * as S from "./Details.styled";
 
 function Details(): React.ReactElement {
   const { city, loading, updateInfo } = useDetails();
-  console.log(city);
+
   return loading ? (
     <>Loading...</>
   ) : (
@@ -40,7 +40,18 @@ function Details(): React.ReactElement {
 
         <Scale />
 
-        <Button onClick={() => updateInfo()}>Update info</Button>
+        <Button
+          onClick={() => updateInfo()}
+          sx={{
+            width: "fit-content",
+            margin: "0 auto",
+            margiBottom: 20,
+          }}
+          variant="contained"
+          size="medium"
+        >
+          Update info
+        </Button>
       </S.Container>
     </DefaultLayout>
   );

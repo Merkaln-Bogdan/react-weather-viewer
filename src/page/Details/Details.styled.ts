@@ -20,7 +20,9 @@ const Container = styled.div<DetailsStyledProps>`
   margin: 0 auto;
 
   background-image: url(${({ asBackground }) =>
-    asBackground && backgroundChooser(asBackground)});
+    asBackground || asBackground === 0
+      ? backgroundChooser(asBackground)
+      : null});
   background-size: cover;
   border-radius: 1rem;
 `;
