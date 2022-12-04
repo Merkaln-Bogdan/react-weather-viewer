@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
+import { backgroundChooser } from "helpers/backgroundChooser";
+
 import { Headline } from "components/Headline";
 import { Icon } from "components/Icon";
 
 type DetailsStyledProps = {
   isMain?: boolean;
+  asBackground?: number;
 };
 
-const Container = styled.div`
+const Container = styled.div<DetailsStyledProps>`
   display: flex;
   flex-direction: column;
   align-items-center;
@@ -16,14 +19,16 @@ const Container = styled.div`
   padding: 2rem;
   margin: 0 auto;
 
-  background-color: #abebea;
+  background-image: url(${({ asBackground }) =>
+    asBackground && backgroundChooser(asBackground)});
+  background-size: cover;
   border-radius: 1rem;
 `;
 const Box = styled.div`
   display: flex;
   align-items: center;
   align-self: center;
-  @media (max-width: 450px) {
+  @media (max-width: 647px) {
     flex-direction: column;
   }
   color: #2e3a3d;
@@ -36,9 +41,10 @@ const Text = styled(Headline)<DetailsStyledProps>`
   font-weight: ${({ isMain }) => (isMain ? "700" : "500")};
 
   text-transform: capitalize;
+  text-shadow: 1px 1px 2px red, 0 0 1em white, 0 0 0.2em white;
 
-  @media (max-width: 450px) {
-    margin: 1rem 0;
+  @media (max-width: 647px) {
+    margin: 0.5rem 0;
   }
 `;
 const SvgIcon = styled(Icon)`
@@ -47,6 +53,7 @@ const SvgIcon = styled(Icon)`
   margin-left: 1.5rem;
 
   vertical-align: middle;
+  color: #5b4b6b;
 `;
 
 const List = styled.ul`

@@ -1,5 +1,6 @@
 export type CityType = {
-  wind: any;
+  wind: { speed: number; deg: number; gust: number };
+  clouds: { all: number };
   id: string;
   name: string;
   main: {

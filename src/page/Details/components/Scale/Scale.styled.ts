@@ -10,7 +10,11 @@ const Container = styled.div`
   max-width: 50rem;
 
   background-color: #daf7ec;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+
+  @media (max-width: 647px) {
+    overflow-y: scroll;
+  }
 `;
 const Scale = styled.ul`
   display: flex;
@@ -20,17 +24,23 @@ const Scale = styled.ul`
   padding: 0.5rem;
 
   list-style: none;
+
+  @media (max-width: 647px) {
+    display: -webkit-box;
+  }
 `;
 
 const Column = styled.li`
   position: relative;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
 
   width: 2.5rem;
   height: 100%;
-  flex-direction: column;
+  margin-bottom: 1rem;
+
   border: 1px solid #cce3da;
 `;
 const Temp = styled.span`

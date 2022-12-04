@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+
 import { DefaultLayout } from "sections/Layout";
 
 import { Scale } from "./components/Scale";
@@ -9,12 +10,12 @@ import * as S from "./Details.styled";
 
 function Details(): React.ReactElement {
   const { city, loading, updateInfo } = useDetails();
-
+  console.log(city);
   return loading ? (
     <>Loading...</>
   ) : (
     <DefaultLayout>
-      <S.Container>
+      <S.Container asBackground={city.clouds?.all}>
         <S.Box>
           <S.Text isMain>{city.name}</S.Text>
           <S.Text isMain>{Math.round(city.main.temp)} &#8451;</S.Text>

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --silent --env=jsdom --testResultsProcessor",
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "predeploy": "npm run build",
@@ -44,6 +44,14 @@
     "@types/styled-components": "^5.1.26",
     "gh-pages": "^4.0.0",
     "react-error-overlay": "6.0.9"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ]
   },
   "eslintConfig": {
     "extends": [

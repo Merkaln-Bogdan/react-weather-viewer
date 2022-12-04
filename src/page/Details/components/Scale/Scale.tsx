@@ -22,7 +22,11 @@ const Scale = (): React.ReactElement => {
         {scale.map((el: any) => (
           <S.Column key={el.id}>
             <S.Data>{el.time}</S.Data>
-            <S.Temp style={{ transform: `translate(0px, ${el.temp}px)` }}>
+            <S.Temp
+              style={{
+                transform: `translateY(${el.temp}px)`,
+              }}
+            >
               {el.temp}
             </S.Temp>
           </S.Column>

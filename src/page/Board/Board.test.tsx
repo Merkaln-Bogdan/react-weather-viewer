@@ -1,14 +1,14 @@
 import { Provider } from "react-redux";
 
 import { render } from "@testing-library/react";
-import { Details } from "./Details";
+import { Board } from "./Board";
 import { store } from "redux/store";
 
-describe("Details", () => {
-  it("Should render Details component", () => {
+describe("render Board page", () => {
+  it("Should render Board component", () => {
     render(
       <Provider store={store}>
-        <Details />
+        <Board />
       </Provider>
     );
   });

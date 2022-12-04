@@ -1,27 +1,18 @@
-import { useContext, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { useContext, useState } from "react";
+import { useAppSelector } from "redux/hooks";
 
 import { StorageContext } from "contexts/StorageContext";
 
-import { getCities } from "redux/slices/cities";
 import { weatherDataService } from "services/services";
 
 const useBoard = () => {
-  const dispatch = useAppDispatch();
-
   const storageContext = useContext(StorageContext);
-  const { storagedData, removeData, putData } = storageContext;
+  const { removeData, putData } = storageContext;
 
   const [query, setQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const { loading, cities } = useAppSelector((state) => state.citiesSlice);
-
-  useEffect(() => {
-    if (storagedData) {
-      dispatch(getCities(storagedData!));
-    }
-  }, [storagedData, dispatch]);
 
   const handleAddCity = () => {
     weatherDataService.getNewCity(query).then((res) => putData(res.data.id));
