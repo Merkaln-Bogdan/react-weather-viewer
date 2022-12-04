@@ -18,8 +18,8 @@ const Item = (props: ItemProps): React.ReactElement => {
       <S.Icon onClick={() => setOpen!(true)} />
     </S.ListItem>
   ) : (
-    <S.LinkItem to={routes.details(city.id)}>
-      <S.ListItem>
+    <S.ListItem>
+      <S.LinkItem to={routes.details(city.id)}>
         <S.Container>
           <S.Info color="white">{city.name}</S.Info>
           <S.Info>{Math.round(city.main.temp)} &#8451;</S.Info>
@@ -27,16 +27,16 @@ const Item = (props: ItemProps): React.ReactElement => {
             <S.Info key={data.id}>{data.description}</S.Info>
           ))}
         </S.Container>
+      </S.LinkItem>
 
-        <Button
-          onClick={() => removeItem!(city.id)}
-          variant="contained"
-          color="error"
-        >
-          Remove
-        </Button>
-      </S.ListItem>
-    </S.LinkItem>
+      <Button
+        onClick={() => removeItem!(city.id)}
+        variant="contained"
+        color="error"
+      >
+        Remove
+      </Button>
+    </S.ListItem>
   );
 };
 

@@ -38,7 +38,7 @@ const LinkItem = styled(Link)`
 `;
 
 const Info = styled(Headline)`
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 
   font-size: 1.5rem;
   font-weight: 700;
