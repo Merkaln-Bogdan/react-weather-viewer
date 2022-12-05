@@ -17,7 +17,7 @@ function App() {
   const { storagedData } = storageContext;
 
   useEffect(() => {
-    if (storagedData) {
+    if (storagedData && storagedData!.length > 0) {
       dispatch(getCities(storagedData!));
     }
   }, [storagedData, dispatch]);

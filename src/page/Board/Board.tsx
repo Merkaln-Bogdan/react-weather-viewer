@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Alert } from "@mui/material";
 
 import { DefaultLayout } from "sections/Layout";
 
@@ -17,11 +17,18 @@ function Board(): React.ReactElement {
     removeData,
     setIsSearchOpen,
     isSearchOpen,
+    isMessageOpen,
   } = useBoard();
 
   return (
     <DefaultLayout>
       <S.Container>
+        {isMessageOpen && (
+          <Alert severity="warning" sx={{ margin: "0 auto" }}>
+            You should have at least one city in the board
+          </Alert>
+        )}
+
         {loading ? (
           <>Loading...</>
         ) : (
@@ -29,7 +36,12 @@ function Board(): React.ReactElement {
             <S.List>
               {cities &&
                 cities?.map((item: any) => (
-                  <Item city={item} removeItem={removeData!} key={item.id} />
+                  <Item
+                    city={item}
+                    removeItem={removeData}
+                    key={item.id}
+                    isDisabled={cities.length < 2}
+                  />
                 ))}
               <Item asAddCard key="addCardKey11" setOpen={setIsSearchOpen} />
             </S.List>

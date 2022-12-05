@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { backgroundChooser } from "helpers/backgroundChooser";
+import { bgImageSetter } from "helpers/bgImageSetter";
 
 import { Headline } from "components/Headline";
 import { Icon } from "components/Icon";
@@ -20,9 +20,7 @@ const Container = styled.div<DetailsStyledProps>`
   margin: 0 auto;
 
   background-image: url(${({ asBackground }) =>
-    asBackground || asBackground === 0
-      ? backgroundChooser(asBackground)
-      : null});
+    asBackground || asBackground === 0 ? bgImageSetter(asBackground) : null});
   background-size: cover;
   border-radius: 1rem;
 `;

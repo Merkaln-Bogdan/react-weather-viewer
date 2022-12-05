@@ -2,7 +2,7 @@ import sunny from "assets/bg-sunny.png";
 import cloudiness from "assets/bg-cloudiness.png";
 import cloud from "assets/bg-clouds.png";
 
-const backgroundChooser = (weather: any) => {
+const bgImageSetter = (weather: any) => {
   switch (true) {
     case weather < 30:
       return sunny;
@@ -15,4 +15,4 @@ const backgroundChooser = (weather: any) => {
   }
 };
 
-export { backgroundChooser };
+export { bgImageSetter };

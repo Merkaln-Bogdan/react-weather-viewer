@@ -6,12 +6,13 @@ import * as S from "./Item.styled";
 type ItemProps = {
   city?: any;
   asAddCard?: boolean;
+  isDisabled?: boolean;
   removeItem?: (arg: number) => void;
   setOpen?: (arg: boolean) => void;
 };
 
 const Item = (props: ItemProps): React.ReactElement => {
-  const { city, removeItem, asAddCard, setOpen } = { ...props };
+  const { city, removeItem, asAddCard, setOpen, isDisabled } = { ...props };
 
   return asAddCard ? (
     <S.ListItem asAddCard={asAddCard}>
@@ -33,6 +34,7 @@ const Item = (props: ItemProps): React.ReactElement => {
         onClick={() => removeItem!(city.id)}
         variant="contained"
         color="error"
+        disabled={isDisabled}
       >
         Remove
       </Button>

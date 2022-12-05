@@ -2,10 +2,10 @@
 import { createContext, useEffect, useState } from "react";
 
 export type Bucket = {
-  storagedData: object;
+  storagedData: Array<string> | null;
   putData: (arg: any) => void;
   removeData: (arg: any) => void;
-  setStoragedData: (arg: any) => void;
+  setStoragedData: (arg: Array<string>) => any;
 };
 
 const defaultState: Bucket = {
@@ -32,15 +32,13 @@ export const StorageProvider: React.FunctionComponent<StorageProps> = ({
     localStorage.setItem("cities", JSON.stringify(initialStorage));
   }
 
-  const [storagedData, setStoragedData] = useState<any>(
-    parsedStorage && parsedStorage
-  );
+  const [storagedData, setStoragedData] = useState<string[]>(parsedStorage);
 
   useEffect(() => {
     localStorage.setItem("cities", JSON.stringify(storagedData));
   }, [storagedData]);
 
-  const putData = (id: any) => {
+  const putData = (id: string) => {
     const isInStorage = storagedData?.some((el: any) => el.id === id);
 
     if (isInStorage) {

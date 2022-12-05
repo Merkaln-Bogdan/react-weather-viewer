@@ -19,7 +19,7 @@ export const getCities = createAsyncThunk(
 interface CitiesState {
   loading: boolean;
   error: string | null;
-  cities: CityType[] | null;
+  cities: CityType[];
 }
 
 const initialState = {

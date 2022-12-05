@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAppSelector } from "redux/hooks";
 
 import { StorageContext } from "contexts/StorageContext";
@@ -10,7 +10,8 @@ const useBoard = () => {
   const { removeData, putData } = storageContext;
 
   const [query, setQuery] = useState("");
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isMessageOpen, setisMessageOpen] = useState<boolean>(false);
 
   const { loading, cities } = useAppSelector((state) => state.citiesSlice);
 
@@ -18,6 +19,17 @@ const useBoard = () => {
     weatherDataService.getNewCity(query).then((res) => putData(res.data.id));
     setIsSearchOpen(false);
   };
+
+  useEffect(() => {
+    if (cities.length === 1) {
+      setisMessageOpen(true);
+    }
+    const timer = setTimeout(() => {
+      setisMessageOpen(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [cities]);
 
   return {
     cities,
@@ -27,6 +39,7 @@ const useBoard = () => {
     removeData,
     setIsSearchOpen,
     isSearchOpen,
+    isMessageOpen,
   };
 };
 export { useBoard };
