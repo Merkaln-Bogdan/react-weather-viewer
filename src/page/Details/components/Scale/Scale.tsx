@@ -24,7 +24,7 @@ const Scale = (): React.ReactElement => {
             <S.Data>{el.time}</S.Data>
             <S.Temp
               style={{
-                transform: `translateY(${el.temp}px)`,
+                transform: `translateY(${el.temp - el.temp * 2}px)`,
               }}
             >
               {el.temp}

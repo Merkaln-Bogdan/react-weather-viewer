@@ -23,6 +23,7 @@ const Container = styled.div<DetailsStyledProps>`
     asBackground || asBackground === 0 ? bgImageSetter(asBackground) : null});
   background-size: cover;
   border-radius: 1rem;
+  box-shadow: 0px 3px 15px 7px rgba(0,0,0,0.75) inset;
 `;
 const Box = styled.div`
   display: flex;

@@ -31,6 +31,7 @@ const ListItem = styled.li<ItemStyledProps>`
   border-radius: 0.5rem;
   background: url(${imgBG});
   background-size: cover;
+  box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.75);
 `;
 
 const LinkItem = styled(Link)`

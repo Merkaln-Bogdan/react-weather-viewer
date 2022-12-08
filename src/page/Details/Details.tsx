@@ -22,7 +22,7 @@ function Details(): React.ReactElement {
         </S.Box>
 
         <S.Text>
-          wind {city.wind.speed}m/c <S.SvgIcon name="WiStrongWind" />
+          wind {city.wind.speed}m/s <S.SvgIcon name="WiStrongWind" />
         </S.Text>
 
         <S.List>
