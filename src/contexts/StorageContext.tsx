@@ -25,17 +25,17 @@ type StorageProps = {
 export const StorageProvider: React.FunctionComponent<StorageProps> = ({
   children,
 }) => {
-  const citiesLocalStorage = localStorage.getItem("cities");
+  const citiesLocalStorage = window.localStorage.getItem("cities");
   const parsedStorage = JSON.parse(citiesLocalStorage!);
 
-  if (parsedStorage === null || undefined) {
-    localStorage.setItem("cities", JSON.stringify(initialStorage));
+  if (citiesLocalStorage === "null" || "undefined") {
+    window.localStorage.setItem("cities", JSON.stringify(initialStorage));
   }
 
   const [storagedData, setStoragedData] = useState<string[]>(parsedStorage);
 
   useEffect(() => {
-    localStorage.setItem("cities", JSON.stringify(storagedData));
+    window.localStorage.setItem("cities", JSON.stringify(storagedData));
   }, [storagedData]);
 
   const putData = (id: string) => {
